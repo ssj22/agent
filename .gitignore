@@ -1,6 +1,0 @@
-.gitignore
-.idea/
-main/target/
-ha/target/
-core/target/
-*.iml
