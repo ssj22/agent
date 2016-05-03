@@ -1,0 +1,29 @@
+{
+  "vertx.deployment.options": {
+    "haEnabled": true,
+    "clustered": false,
+    "workerPoolSize": 20
+  },
+  "http.deployment.options": {
+    "config": {
+      "http.port": 8080,
+      "https.port": 8443,
+      "certificate-path": "keystore.jks",
+      "certificate-password": "wildcard#210115"
+    },
+    "ha": true
+  },
+  "setup.deployment.options": {
+    "config": {
+      "db.master.driver":"org.postgresql.Driver",
+      "db.master.username":"postgres",
+      "db.master.password":"",
+      "db.master.url":"jdbc:postgresql://localhost/cctest",
+      "db.slave.driver":"org.postgresql.Driver",
+      "db.slave.username":"postgres",
+      "db.slave.password":"",
+      "db.slave.url":"jdbc:postgresql://localhost/master"
+    },
+    "ha": true
+  }
+}

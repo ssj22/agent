@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>agent</artifactId>
+        <groupId>net.cloudamize.agent</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.cloudamize.agent</groupId>
+    <artifactId>agent-main</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <!-- Build properties -->
+        <maven-compiler-plugin>3.5.1</maven-compiler-plugin>
+        <maven-shade-plugin>2.4.3</maven-shade-plugin>
+        <main.class>net.cloudamize.agent.SpringBootApp</main.class>
+
+        <!-- Dependencies -->
+        <vertx.version>3.2.1</vertx.version>
+        <spring.boot.starter.version>1.3.3.RELEASE</spring.boot.starter.version>
+        <postgresql.driver.version></postgresql.driver.version>
+        <jooq.version>3.7.3</jooq.version>
+        <quasar.version>0.7.4</quasar.version>
+        <quasar.jooq.version>0.7.0</quasar.jooq.version>
+        <qbit.vertx.version>1.5.0.RELEASE</qbit.vertx.version>
+        <tomcat.jdbc.version>8.0.28</tomcat.jdbc.version>
+        <lombok.version>1.16.8</lombok.version>
+        <postgresql.version>9.4.1207.jre7</postgresql.version>
+        <spring.version>4.2.5.RELEASE</spring.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spring Depedencies -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- Vertx Depedencies -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-sync</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <!-- Postgres Driver dependency -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-mysql-postgresql-client</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <!-- Hazelcast dependency for Clustering -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-hazelcast</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <!-- Spring boot dependency -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring.boot.starter.version}</version>
+        </dependency>
+        <!-- Vertx-Spring integration dependency -->
+        <dependency>
+            <groupId>org.jacpfx.vertx.spring</groupId>
+            <artifactId>vertx-spring-ext</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+        <!-- Lombok dependency for Convenience -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <!-- JOOQ dependency for DSL queries -->
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+            <version>${jooq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-meta</artifactId>
+            <version>${jooq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-codegen</artifactId>
+            <version>${jooq.version}</version>
+        </dependency>
+        <!-- Quasar dependency for Fibers -->
+        <dependency>
+            <groupId>co.paralleluniverse</groupId>
+            <artifactId>quasar-core</artifactId>
+            <version>${quasar.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>co.paralleluniverse</groupId>
+            <artifactId>comsat-jooq</artifactId>
+            <version>${quasar.jooq.version}</version>
+        </dependency>
+
+        <!-- Tomcat JDBC pooling dependency -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+            <version>${tomcat.jdbc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen-maven</artifactId>
+                <version>${jooq.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>${postgresql.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <jdbc>
+                        <driver>org.postgresql.Driver</driver>
+                        <user>postgres</user>
+                        <password></password>
+                        <url>jdbc:postgresql://localhost/cctest</url>
+                    </jdbc>
+                    <generator>
+                        <name>org.jooq.util.JavaGenerator</name>
+
+                        <database>
+                            <name>org.jooq.util.postgres.PostgresDatabase</name>
+                            <inputSchema>public</inputSchema>
+                            <includes>agent_status</includes>
+                            <excludes></excludes>
+                        </database>
+
+                        <target>
+                            <packageName>net.cloudamize.agent.model</packageName>
+                            <directory>target/generated-sources/jooq</directory>
+                        </target>
+                    </generator>
+                </configuration>
+
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven-shade-plugin}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <main-class>${main.class}</main-class>
+                                    </manifestEntries>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/io.vertx.core.spi.VerticleFactory</resource>
+                                </transformer>
+                            </transformers>
+                            <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                    <arguments>
+                        <argument>Argument1</argument>
+                    </arguments>
+                    <skip>true</skip>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>vertx.logger-delegate-factory-class-name</key>
+                            <value>io.vertx.core.logging.SLF4JLogDelegateFactory</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>

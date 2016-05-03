@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.4.0.xsd">
+    <jdbc>
+        <driver>org.postgresql.Driver</driver>
+        <url>jdbc:postgresql://localhost/cctest</url>
+        <user>postgres</user>
+    </jdbc>
+    <generator>
+        <name>org.jooq.util.JavaGenerator</name>
+        <database>
+            <name>org.jooq.util.postgres.PostgresDatabase</name>
+            <includes>.*</includes>
+            <excludes></excludes>
+            <includeExcludeColumns>false</includeExcludeColumns>
+            <recordVersionFields></recordVersionFields>
+            <recordTimestampFields></recordTimestampFields>
+            <syntheticPrimaryKeys></syntheticPrimaryKeys>
+            <overridePrimaryKeys></overridePrimaryKeys>
+            <dateAsTimestamp>false</dateAsTimestamp>
+            <unsignedTypes>true</unsignedTypes>
+            <inputSchema>cctest</inputSchema>
+            <outputSchemaToDefault>false</outputSchemaToDefault>
+        </database>
+        <target>
+            <packageName>net.cloudamize.agent.generated</packageName>
+            <directory>/Users/sushiljoshi/projects/agent/main/target/generated-sources/jooq</directory>
+        </target>
+    </generator>
+</configuration>
